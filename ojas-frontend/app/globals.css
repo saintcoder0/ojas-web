@@ -1,0 +1,278 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@import "./styles/theme.css";
+@import "./styles/dashboard.css";
+@import "./styles/rituals.css";
+@import "./styles/prakriti.css";
+@import "./styles/cycle.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #f7f3f8;
+  --foreground: #1a0a2e;
+  --ojas-accent: #c06080;
+  --ojas-dark-text: #1C1917;
+  --ojas-light-surface: #FAF6F0;
+  --ojas-cream-bg: #F4EFEA;
+  --ojas-warm-card: #FDF6EC;
+}
+
+:root.dark, html.dark {
+  --background: #0F0B1A;
+  --foreground: #F7F3F8;
+}
+
+body {
+  @apply bg-background text-on-background;
+  font-family: 'Inter', system-ui, sans-serif;
+  transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1), color 0.5s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Typography override for headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Instrument Serif', serif;
+  font-weight: 400;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-background;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-primary rounded;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary-container;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Cursor Trail Orbs - Desktop Only */
+@media (pointer: fine) {
+  .cursor-orb {
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+  }
+  .cursor-orb-1 {
+    width: 72px; height: 72px;
+    background: radial-gradient(circle, rgba(255,182,203,0.35) 0%, transparent 70%);
+    border: 1px solid rgba(255,182,203,0.25);
+  }
+  .cursor-orb-2 {
+    width: 44px; height: 44px;
+    background: radial-gradient(circle, rgba(255,182,203,0.2) 0%, transparent 70%);
+    border: 1px solid rgba(255,182,203,0.15);
+  }
+}
+
+/* Touch devices hide custom cursor */
+@media (pointer: coarse) {
+  .cursor-orb {
+    display: none !important;
+  }
+}
+
+/* ── CUSTOM SVG & LAYOUT ANIMATIONS FROM DESIGN SYSTEM ── */
+@keyframes lotus-float {
+  0%,100% { transform: translateY(0) scale(1); }
+  50%      { transform: translateY(-10px) scale(1.03); }
+}
+@keyframes ping-custom {
+  0%   { transform: scale(1); opacity: 0.6; }
+  75%  { transform: scale(1.6); opacity: 0; }
+  100% { opacity: 0; }
+}
+@keyframes glow-pulse {
+  0%,100% { opacity: 0.35; transform: scale(1); }
+  50%      { opacity: 0.75; transform: scale(1.12); }
+}
+@keyframes bloom-center-petal {
+  from { transform: scaleY(0.1) translateY(20px); opacity: 0; }
+  to   { transform: scaleY(1) translateY(0); opacity: 1; }
+}
+@keyframes bloom-mid-left {
+  from { transform: rotate(25deg) scaleY(0.2); opacity: 0; }
+  to   { transform: rotate(0deg) scaleY(1); opacity: 1; }
+}
+@keyframes bloom-mid-right {
+  from { transform: rotate(-25deg) scaleY(0.2); opacity: 0; }
+  to   { transform: rotate(0deg) scaleY(1); opacity: 1; }
+}
+@keyframes bloom-side-left {
+  from { transform: rotate(45deg) scale(0.2); opacity: 0; }
+  to   { transform: rotate(0deg) scale(1); opacity: 1; }
+}
+@keyframes bloom-side-right {
+  from { transform: rotate(-45deg) scale(0.2); opacity: 0; }
+  to   { transform: rotate(0deg) scale(1); opacity: 1; }
+}
+@keyframes bloom-back-left {
+  from { transform: rotate(60deg) scale(0.1); opacity: 0; }
+  to   { transform: rotate(0deg) scale(1); opacity: 1; }
+}
+@keyframes bloom-back-right {
+  from { transform: rotate(-60deg) scale(0.1); opacity: 0; }
+  to   { transform: rotate(0deg) scale(1); opacity: 1; }
+}
+@keyframes leaf-grow-left {
+  from { transform: rotate(-30deg) scaleX(0.1); opacity: 0; }
+  to   { transform: rotate(0deg) scaleX(1); opacity: 1; }
+}
+@keyframes leaf-grow-right {
+  from { transform: rotate(30deg) scaleX(0.1); opacity: 0; }
+  to   { transform: rotate(0deg) scaleX(1); opacity: 1; }
+}
+@keyframes stamen-rise {
+  from { transform: scaleY(0); opacity: 0; }
+  to   { transform: scaleY(1); opacity: 1; }
+}
+@keyframes stamen-glow {
+  0%,100% { opacity: 0.9; } 50% { opacity: 0.4; }
+}
+@keyframes water-ripple {
+  from { transform: scaleX(0); opacity: 0; }
+  to   { transform: scaleX(1); opacity: 1; }
+}
+@keyframes orb-drift {
+  0%,100% { transform: translate(0,0); opacity: 0.5; }
+  33%      { transform: translate(10px,-14px); opacity: 0.85; }
+  66%      { transform: translate(-8px,8px); opacity: 0.6; }
+}
+@keyframes divider-grow {
+  from { transform: scaleX(0); opacity: 0; }
+  to   { transform: scaleX(1); opacity: 1; }
+}
+@keyframes dot-pulse {
+  0%,100% { transform: scale(1); opacity: 0.5; }
+  50%      { transform: scale(1.6); opacity: 1; }
+}
+@keyframes soundbar {
+  from { transform: scaleY(0.3); } to { transform: scaleY(1); }
+}
+@keyframes card-rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+\n
+/* Dashboard Template specific styles */
+.ambient-glow {
+    background: radial-gradient(circle at top left, rgba(254, 181, 202, 0.15) 0%, rgba(251, 249, 245, 0) 50%);
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.pulse-pink {
+    animation: pulse-pink 2s infinite;
+}
+
+\n
+/* Dashboard Template specific styles */
+.ambient-glow {
+    background: radial-gradient(circle at top left, rgba(254, 181, 202, 0.15) 0%, rgba(251, 249, 245, 0) 50%);
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.pulse-pink {
+    animation: pulse-pink 2s infinite;
+}
+
+@keyframes pulse-pink {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(254, 181, 202, 0.7); }
+    70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(254, 181, 202, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(254, 181, 202, 0); }
+}
+
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Jyotish Blueprint baked animations */
+.breathing-glow {
+    animation: jyotishBreathe 8s ease-in-out infinite;
+    background: radial-gradient(circle, rgba(254, 181, 202, 0.1) 0%, rgba(0, 52, 28, 0) 70%);
+}
+
+@keyframes jyotishBreathe {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.2); }
+}
+
+.fade-in-up {
+    animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    border-radius: 12px;
+}
+
+.glass-card:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.06);
+    border-color: #feb5ca;
+}
+
+.ritual-btn:active {
+    transform: scale(0.95);
+}
+
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+.delay-5 { animation-delay: 0.5s; }
+.delay-6 { animation-delay: 0.6s; }
+
+.matrix-cell {
+    transition: all 0.3s ease;
+}
+.matrix-cell:hover {
+    background-color: rgba(254, 181, 202, 0.15);
+    color: #feb5ca;
+}
+
+.italic-serif-font {
+    font-family: 'Cormorant Garamond', 'Instrument Serif', serif;
+    font-style: italic;
+}
